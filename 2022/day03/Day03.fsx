@@ -8,7 +8,7 @@ let priority (item: char) =
     if item >= 'a' then n - 96 else n - 38
 
 input
-|> Seq.map (Seq.splitInto 2 >> intersect >> Seq.map priority >> Seq.sum)
+|> Seq.collect (Seq.splitInto 2 >> intersect >> Seq.map priority)
 |> Seq.sum
 |> printfn "%d"
 

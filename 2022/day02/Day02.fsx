@@ -1,8 +1,8 @@
-let parse (s: string) =
-    let m = System.Text.RegularExpressions.Regex.Match(s, "([A-C]) ([X-Z])")
-    m.Groups[1].Value, m.Groups[2].Value
+let split (s: string) =
+    let a = s.Split(" ")
+    a[0], a[1]
 
-let input = System.IO.File.ReadLines("day02/input.txt") |> Seq.map parse
+let input = System.IO.File.ReadLines("day02/input.txt") |> Seq.map split
 
 let score (theirs, yours) =
     let choiceScore =
@@ -11,6 +11,7 @@ let score (theirs, yours) =
         | "Y" -> 2
         | "Z" -> 3
         | _ -> raise <| System.Exception("Can't happen")
+
     let outcomeScore =
         match theirs, yours with
         | "A", "Y" -> 6
@@ -20,6 +21,7 @@ let score (theirs, yours) =
         | "B", "Y" -> 3
         | "C", "Z" -> 3
         | _ -> 0
+
     choiceScore + outcomeScore
 
 let remapChoise (theirs, outcome) =
@@ -32,6 +34,7 @@ let remapChoise (theirs, outcome) =
         | "B", "Y" -> "Y"
         | "C", "X" -> "Y"
         | _ -> "Z"
+
     theirs, yours
 
 input |> Seq.map score |> Seq.sum |> printfn "%d"
