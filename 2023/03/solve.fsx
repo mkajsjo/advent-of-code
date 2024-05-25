@@ -1,7 +1,6 @@
 #r "../../lib/bin/lib.dll"
 open Lib
 open System
-open FSharp.Collections
 
 let getNumbersByAdjacent (lines: #seq<string>): Map<int * int, seq<int>> =
     lines
