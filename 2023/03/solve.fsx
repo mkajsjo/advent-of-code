@@ -1,6 +1,5 @@
 #r "../../lib/bin/lib.dll"
 open Lib
-open System
 
 let getNumbersByAdjacent (lines: #seq<string>): Map<int * int, seq<int>> =
     lines
@@ -13,7 +12,7 @@ let getNumbersByAdjacent (lines: #seq<string>): Map<int * int, seq<int>> =
     |> Seq.map (fun (k, vs) -> k, Seq.map snd vs)
     |> Map.ofSeq
 
-let isSymbol (c: char) = not (c = '.' || Char.IsDigit c)
+let isSymbol (c: char) = not (c = '.' || System.Char.IsDigit c)
 
 let getNumbers input =
     let nrs = getNumbersByAdjacent input
