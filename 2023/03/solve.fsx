@@ -3,33 +3,22 @@ open Lib
 open System
 open FSharp.Collections
 
-let getIndexedNrs (lines: #seq<string>): seq<(int * int * int) * int> =
-    let parseNrWithIndex (y, line) =
+let getNumbersByAdjacent (lines: #seq<string>): Map<int * int, seq<int>> =
+    lines
+    |> Seq.indexed
+    |> Seq.collect (fun (y, line) ->
         System.Text.RegularExpressions.Regex.Matches(line, @"\d+")
-        |> Seq.map (fun m -> (m.Index, m.Index + m.Value.Length - 1, y), int m.Value)
-
-    lines |> Seq.indexed |> Seq.collect parseNrWithIndex
-
-let indexed (lines: #seq<#seq<'t>>): seq<(int * int) * 't> =
-    lines |> Seq.indexed |> Seq.collect (fun (y, line) -> line |> Seq.indexed |> Seq.map (fun (x, n) -> (x, y), n))
+        |> Seq.collect (fun m -> Seq.allPairs [m.Index-1..m.Index + m.Value.Length] [y-1..y+1] |> Seq.map (fun i -> i, int m.Value))
+    )
+    |> Seq.groupBy fst
+    |> Seq.map (fun (k, vs) -> k, Seq.map snd vs)
+    |> Map.ofSeq
 
 let isSymbol (c: char) = not (c = '.' || Char.IsDigit c)
 
-let isAdjacent (ax, ax2, ay) (bx, by) = abs (by - ay) <= 1 && bx >= ax - 1 && bx <= ax2 + 1
+let getNumbers input =
+    let nrs = getNumbersByAdjacent input
+    input |> indexed2d |> Seq.filter (snd >> isSymbol) |> Seq.choose (fun (i, _) -> Map.tryFind i nrs)
 
-let getCoords (filter: char -> bool) (lines: #seq<#seq<char>>): seq<int * int> =
-    lines |> indexed |> Seq.filter (snd >> filter) |> Seq.map fst
-
-solve "03" (fun input ->
-    let coords = getCoords isSymbol input
-    input |> getIndexedNrs |> Seq.filter (fun (i, _) -> coords |> Seq.exists (isAdjacent i)) |> Seq.sumBy snd
-)
-
-solve "03" (fun input ->
-    let coords = getCoords ((=) '*') input
-    let groupByCoord =
-        Seq.groupBy (fun (i, _) -> coords |> Seq.tryFind (isAdjacent i))
-        >> Seq.map (snd >> Seq.map snd)
-
-    input |> getIndexedNrs |> groupByCoord |> Seq.filter (Seq.length >> (=) 2) |> Seq.sumBy (Seq.reduce (*))
-)
+solve "03" (getNumbers >> Seq.sumBy Seq.sum)
+solve "03" (getNumbers >> Seq.filter (Seq.length >> (=) 2) >> Seq.sumBy (Seq.reduce (*)))
