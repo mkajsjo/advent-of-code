@@ -15,4 +15,4 @@ let rec processCards (acc: list<int>) (cardScores: list<int>) =
     | _ -> []
 
 solve "04" (Seq.sumBy (parseLine >> getScore))
-solve "04" (Seq.map parseLine >> List.ofSeq >> processCards [0] >> Seq.sum)
+solve "04" (Seq.map parseLine >> List.ofSeq >> processCards [] >> Seq.sum)
