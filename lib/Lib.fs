@@ -14,7 +14,7 @@ let parseNr input pattern =
     let m = Regex.Match(input, pattern)
     if m.Success then int m.Groups[1].Value else 0
 
-let parseNrs (str: string): seq<int> =
+let parseNrs (str: string) : seq<int> =
     System.Text.RegularExpressions.Regex.Matches(str, @"\d+")
     |> Seq.map (fun m -> int m.Value)
 
@@ -29,3 +29,10 @@ module List =
         | x :: xs, y :: ys -> f x y :: merge f xs ys
         | xs, [] -> xs
         | [], ys -> ys
+
+let regexMatch (pattern: string) (input: string) : string =
+    System.Text.RegularExpressions.Regex.Match(input, pattern) |> fun m -> m.Value
+
+let regexMatches (pattern: string) (input: string) : seq<string> =
+    System.Text.RegularExpressions.Regex.Matches(input, pattern)
+    |> Seq.map (fun m -> m.Value)
