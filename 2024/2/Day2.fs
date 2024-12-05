@@ -1,7 +1,7 @@
 module Day2
 
-let solve1 (input: string) =
+let solve1 (input: array<string>) =
     failwith "TODO"
 
-let solve2 (input: string) =
+let solve2 (input: array<string>) =
     failwith "TODO"

@@ -1,7 +1,7 @@
 ﻿
 [<EntryPoint>]
 let main args =
-    let input = System.IO.File.ReadAllText $"{args[0]}/input.txt"
+    let input = System.IO.File.ReadAllLines $"{args[0]}/input.txt"
 
     match args[0] with
     | "1" ->
