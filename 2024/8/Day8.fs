@@ -1,7 +1,7 @@
 module Day8
 
 let solve1 (input: array<string>) =
-    failwith "TODO"
+    0
 
 let solve2 (input: array<string>) =
-    failwith "TODO"
+    0
