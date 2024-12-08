@@ -1,14 +1,28 @@
-<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
-<html><head>
-<title>500 Internal Server Error</title>
-</head><body>
-<h1>Internal Server Error</h1>
-<p>The server encountered an internal error or
-misconfiguration and was unable to complete
-your request.</p>
-<p>Please contact the server administrator at 
- webmaster@localhost to inform them of the time this error occurred,
- and the actions you performed just before this error.</p>
-<p>More information about this error may be available
-in the server error log.</p>
-</body></html>
+Faerun to Tristram = 65
+Faerun to Tambi = 129
+Faerun to Norrath = 144
+Faerun to Snowdin = 71
+Faerun to Straylight = 137
+Faerun to AlphaCentauri = 3
+Faerun to Arbre = 149
+Tristram to Tambi = 63
+Tristram to Norrath = 4
+Tristram to Snowdin = 105
+Tristram to Straylight = 125
+Tristram to AlphaCentauri = 55
+Tristram to Arbre = 14
+Tambi to Norrath = 68
+Tambi to Snowdin = 52
+Tambi to Straylight = 65
+Tambi to AlphaCentauri = 22
+Tambi to Arbre = 143
+Norrath to Snowdin = 8
+Norrath to Straylight = 23
+Norrath to AlphaCentauri = 136
+Norrath to Arbre = 115
+Snowdin to Straylight = 101
+Snowdin to AlphaCentauri = 84
+Snowdin to Arbre = 96
+Straylight to AlphaCentauri = 107
+Straylight to Arbre = 14
+AlphaCentauri to Arbre = 46
